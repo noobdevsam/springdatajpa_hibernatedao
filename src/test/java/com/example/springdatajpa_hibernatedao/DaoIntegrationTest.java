@@ -60,4 +60,19 @@ public class DaoIntegrationTest {
 
 		assertThat(updated.getLastName()).isEqualTo("Knight");
 	}
+
+	@Test
+	void test_delete_author_by_id() {
+		System.out.println("delete-author-by-id");
+		Author author = new Author();
+		author.setFirstName("Sam");
+		author.setLastName("k");
+		Author saved = authorDaoImpl.saveNewAuthor(author);
+
+		authorDaoImpl.deleteAuthorById(saved.getId());
+
+		Author deleted = authorDaoImpl.getById(saved.getId());
+		assertThat(deleted).isNull();
+		assertThat(authorDaoImpl.getById(saved.getId()));
+	}
 }
