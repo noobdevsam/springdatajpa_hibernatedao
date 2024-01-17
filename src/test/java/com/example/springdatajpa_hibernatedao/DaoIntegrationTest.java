@@ -10,7 +10,6 @@ import com.example.springdatajpa_hibernatedao.dao.*;
 import com.example.springdatajpa_hibernatedao.model.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DataJpaTest
 @ComponentScan(basePackages = {"com.example.springdatajpa_hibernatedao"})
