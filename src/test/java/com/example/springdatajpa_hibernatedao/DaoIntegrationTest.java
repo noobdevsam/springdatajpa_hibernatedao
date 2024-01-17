@@ -19,6 +19,9 @@ public class DaoIntegrationTest {
 	@Autowired
 	AuthorDaoImpl authorDaoImpl;
 
+	@Autowired
+	BookDaoImpl bookDaoImpl;
+
 	@Test
 	void test_get_author_by_id() {
 		System.out.println("get-by-id");
@@ -73,5 +76,58 @@ public class DaoIntegrationTest {
 		Author deleted = authorDaoImpl.getById(saved.getId());
 		assertThat(deleted).isNull();
 		assertThat(authorDaoImpl.getById(saved.getId()));
+	}
+
+	@Test
+	void test_get_book_by_id() {
+		Book book = bookDaoImpl.getById(3L);
+		assertThat(book).isNotNull();
+	}
+
+	@Test
+	void test_find_book_by_title() {
+		Book book = bookDaoImpl.findBookByTitle("Clean Code");
+		assertThat(book.getTitle()).isEqualTo("Clean Code");
+	}
+
+	@Test
+	void test_save_new_book() {
+		Book book = new Book();
+		book.setIsbn("48363628");
+		book.setPublisher("Self");
+		book.setTitle("Sgdhd");
+		book.setAuthorId(1L);
+		Book saved = bookDaoImpl.saveNewBook(book);
+		assertThat(saved).isNotNull();
+	}
+	
+	@Test
+	void test_update_book() {
+		Book book = new Book();
+		book.setIsbn("48363628");
+		book.setPublisher("Self");
+		book.setTitle("Sgdhd");
+		book.setAuthorId(1L);
+		Book saved = bookDaoImpl.saveNewBook(book);
+
+		saved.setTitle("my book");
+		bookDaoImpl.updateBook(saved);
+
+		Book fetched = bookDaoImpl.getById(saved.getId());
+		assertThat(fetched.getTitle()).isEqualTo("my book");
+	}
+
+	@Test
+	void test_delete_book_by_id() {
+		Book book = new Book();
+		book.setIsbn("48363628");
+		book.setPublisher("Self");
+		book.setTitle("Sgdhd");
+		book.setAuthorId(1L);
+		Book saved = bookDaoImpl.saveNewBook(book);
+
+		bookDaoImpl.deleteBookById(saved.getId());
+		Book dbook = bookDaoImpl.getById(saved.getId());
+		assertThat(dbook).isNull();
 	}
 }
