@@ -1,6 +1,7 @@
 package com.example.springdatajpa_hibernatedao.dao;
 
 import com.example.springdatajpa_hibernatedao.model.Author;
+import java.util.List;
 import org.springframework.stereotype.Component;
 import jakarta.persistence.*;
 
@@ -72,6 +73,22 @@ public class AuthorDaoImpl implements AuthorDao {
 		em.flush();
 		em.getTransaction().commit();
 		em.close();
+	}
+
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Author> listAuthorByLastNameLike(String lastName) {
+		EntityManager em = getEntityManager();
+		
+		try {
+			Query query = em.createQuery("SELECT a from Author a WHERE a.lastName LIKE :last_name");
+			query.setParameter("last_name", lastName + "%");
+			List<Author> authors = query.getResultList();
+			return authors;
+		} finally {
+			em.close();
+		}
 	}
 
 	// helper method to get entity-manager from entity-manager-factory

@@ -11,6 +11,8 @@ import com.example.springdatajpa_hibernatedao.model.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+import java.util.List;
+
 @DataJpaTest
 @ComponentScan(basePackages = {"com.example.springdatajpa_hibernatedao"})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -76,6 +78,13 @@ public class DaoIntegrationTest {
 		Author deleted = authorDaoImpl.getById(saved.getId());
 		assertThat(deleted).isNull();
 		assertThat(authorDaoImpl.getById(saved.getId()));
+	}
+
+	@Test
+	void test_list_author_by_last_name_like() {
+		List<Author> authors = authorDaoImpl.listAuthorByLastNameLike("Wall");
+		assertThat(authors).isNotNull();
+		assertThat(authors.size()).isGreaterThan(0);
 	}
 
 	@Test
