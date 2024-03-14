@@ -6,6 +6,7 @@ import lombok.*;
 @Entity
 @NoArgsConstructor
 @Data
+@NamedQuery(name = "author_find_all", query = "FROM Author")
 public class Author {
 
 	@Id

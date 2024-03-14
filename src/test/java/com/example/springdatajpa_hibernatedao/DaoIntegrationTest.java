@@ -102,6 +102,13 @@ public class DaoIntegrationTest {
 	}
 
 	@Test
+	void test_author_find_all() {
+		var authors = authorDaoImpl.findAll();
+		assertThat(authors).isNotNull();
+		assertThat(authors.size()).isGreaterThan(0);
+	}
+
+	@Test
 	void test_save_new_book() {
 		Book book = new Book();
 		book.setIsbn("48363628");
