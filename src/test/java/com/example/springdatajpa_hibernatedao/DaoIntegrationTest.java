@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.example.springdatajpa_hibernatedao.dao.*;
 import com.example.springdatajpa_hibernatedao.model.*;
 
+import net.bytebuddy.utility.RandomString;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.util.List;
@@ -138,5 +140,17 @@ public class DaoIntegrationTest {
 		bookDaoImpl.deleteBookById(saved.getId());
 		Book dbook = bookDaoImpl.getById(saved.getId());
 		assertThat(dbook).isNull();
+	}
+
+	@Test
+	void test_find_book_by_isbn() {
+		var book = new Book();
+		book.setTitle("Title ISBN");
+		book.setIsbn("1234" + RandomString.make());
+
+		var saved = bookDaoImpl.saveNewBook(book);
+
+		var fetched = bookDaoImpl.findByISBN(saved.getIsbn());
+		assertThat(fetched).isNotNull();
 	}
 }
