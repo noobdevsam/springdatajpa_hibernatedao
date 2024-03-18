@@ -10,4 +10,5 @@ public interface BookDao {
 	void deleteBookById(Long id);
 	Book findByISBN(String isbn);
 	Book findBookByTitleCriteria(String title);
+	Book findBookByTitleNative(String title);
 }
