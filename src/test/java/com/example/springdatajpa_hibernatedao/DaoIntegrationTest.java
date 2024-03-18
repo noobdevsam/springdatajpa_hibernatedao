@@ -47,6 +47,12 @@ public class DaoIntegrationTest {
 	}
 
 	@Test
+	void test_find_author_by_name_native() {
+		Author author = authorDaoImpl.findAuthorByNameNative("Craig", "Walls");
+		assertThat(author).isNotNull();
+	}
+
+	@Test
 	void test_save_new_author() {
 		System.out.println("save-new-author");
 		Author author = new Author();
