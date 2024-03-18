@@ -21,10 +21,10 @@ import java.util.List;
 public class DaoIntegrationTest {
 
 	@Autowired
-	AuthorDaoImpl authorDaoImpl;
+	AuthorDao authorDaoImpl;
 
 	@Autowired
-	BookDaoImpl bookDaoImpl;
+	BookDao bookDaoImpl;
 
 	@Test
 	void test_get_author_by_id() {
