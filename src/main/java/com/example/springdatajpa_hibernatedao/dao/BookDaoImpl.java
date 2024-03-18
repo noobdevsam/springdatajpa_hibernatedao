@@ -1,10 +1,16 @@
 package com.example.springdatajpa_hibernatedao.dao;
 
+
 import org.springframework.stereotype.Component;
 import com.example.springdatajpa_hibernatedao.model.Book;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.ParameterExpression;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
 
 @Component
 public class BookDaoImpl implements BookDao {
@@ -31,6 +37,31 @@ public class BookDaoImpl implements BookDao {
         Book book = query.getSingleResult();
         em.close();
         return book;
+    }
+
+    @Override
+    public Book findBookByTitleCriteria(String title) {
+        EntityManager em = getEntityManager();
+
+        try{
+            CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+            CriteriaQuery<Book> criteriaQuery = criteriaBuilder.createQuery(Book.class);
+
+            Root<Book> root = criteriaQuery.from(Book.class);
+
+            ParameterExpression<String> titleParam = criteriaBuilder.parameter(String.class);
+
+            Predicate tPredicate = criteriaBuilder.equal(root.get("title"), titleParam);
+            
+            criteriaQuery.select(root).where(tPredicate);
+
+            TypedQuery<Book> typedQuery = em.createQuery(criteriaQuery);
+            typedQuery.setParameter(titleParam, title);
+
+            return typedQuery.getSingleResult();
+        } finally {
+            em.close();
+        }
     }
 
     @Override

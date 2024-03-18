@@ -108,6 +108,12 @@ public class DaoIntegrationTest {
 	}
 
 	@Test
+	void test_find_book_by_title_criteria() {
+		Book book = bookDaoImpl.findBookByTitleCriteria("Clean Code");
+		assertThat(book).isNotNull();
+	}
+
+	@Test
 	void test_author_find_all() {
 		var authors = authorDaoImpl.findAll();
 		assertThat(authors).isNotNull();

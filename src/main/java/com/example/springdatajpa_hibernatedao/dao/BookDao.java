@@ -9,4 +9,5 @@ public interface BookDao {
 	Book updateBook(Book book);
 	void deleteBookById(Long id);
 	Book findByISBN(String isbn);
+	Book findBookByTitleCriteria(String title);
 }
