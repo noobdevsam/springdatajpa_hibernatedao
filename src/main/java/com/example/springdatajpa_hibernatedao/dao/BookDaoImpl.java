@@ -1,17 +1,9 @@
 package com.example.springdatajpa_hibernatedao.dao;
 
-
 import org.springframework.stereotype.Component;
 import com.example.springdatajpa_hibernatedao.model.Book;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Query;
-import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.ParameterExpression;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
+import jakarta.persistence.*;
+import jakarta.persistence.criteria.*;
 
 @Component
 public class BookDaoImpl implements BookDao {

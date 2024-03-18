@@ -1,14 +1,10 @@
 package com.example.springdatajpa_hibernatedao.dao;
 
-import com.example.springdatajpa_hibernatedao.model.Author;
 import java.util.List;
 import org.springframework.stereotype.Component;
+import com.example.springdatajpa_hibernatedao.model.Author;
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.ParameterExpression;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.*;
 
 @Component
 public class AuthorDaoImpl implements AuthorDao {
